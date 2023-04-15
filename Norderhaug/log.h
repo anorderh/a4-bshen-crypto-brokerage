@@ -16,7 +16,7 @@
  * 
  * produced and inRequestQueue reflect numbers *after* adding the current request.
  */
-void log_request_added (RequestType type, 
+void log_request_added (RequestType type,
                         unsigned int produced[], 
                         unsigned int inRequestQueue[]);
 
@@ -35,7 +35,7 @@ void log_request_added (RequestType type,
  * 
  * Counts reflect numbers *after* the request has been removed
  */
-void log_request_removed(Consumers consumers, RequestType type, 
+void log_request_removed(ConsumerType consumers, RequestType type,
                          unsigned int consumed[], unsigned int inRequestQueue[]);
 
 /**
