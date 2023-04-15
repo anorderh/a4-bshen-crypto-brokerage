@@ -2,6 +2,7 @@
 // Created by Anthony Norderhaug on 4/14/23.
 //
 #include "Brokerage.h"
+#include "Synch.h"
 extern "C" {
     #include "cryptoexchange.h"
 }
@@ -18,6 +19,7 @@ int main(int argc, char **argv) {
     Brokerage brokerage(argc, argv);
 
     // 2a. Create synchronization obj holding relevant semaphores
+    Synch synch(brokerage.queue_limit, brokerage.btc_limit);
     // 2b. Create threads utilizing data from fields
 
     // 3. Create buffer and implement mutex for exclusive access

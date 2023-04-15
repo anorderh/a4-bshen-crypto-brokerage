@@ -2,8 +2,8 @@
 // Created by Anthony Norderhaug on 4/14/23.
 //
 
-#include "Transaction.h"
+#include "Service.h"
 
-TradeRequest::TradeRequest(bool isBTC) {
+TradeRequestService::TradeRequestService(bool isBTC) {
     this->isBTC = isBTC;
 }

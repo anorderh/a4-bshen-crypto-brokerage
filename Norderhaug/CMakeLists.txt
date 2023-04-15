@@ -9,4 +9,15 @@ add_executable(Norderhaug
         cryptoexchange.h
         log.c
         log.h
-        main.cpp)
+        main.cpp
+        Brokerage.cpp
+        Brokerage.h
+        Service.cpp
+        Service.h
+        Synch.cpp
+        Synch.h
+        Request.cpp
+        Request.h
+        Buffer.cpp
+        Buffer.h
+        )

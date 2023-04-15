@@ -6,10 +6,10 @@
 
 void Brokerage::createServices() {
     // Initializing consumers & producers
-    this->consumers[Bitcoin] = TradeRequest(true);
-    this->consumers[Ethereum] = TradeRequest(false);
-    this->producers[BlockchainX] = RequestTransaction();
-    this->producers[BlockchainY] = RequestTransaction();
+    this->consumers[Bitcoin] = TradeRequestService(true);
+    this->consumers[Ethereum] = TradeRequestService(false);
+    this->producers[BlockchainX] = RequestTransactionService();
+    this->producers[BlockchainY] = RequestTransactionService();
 }
 
 Brokerage::Brokerage(int argc, char** argv) {
@@ -24,8 +24,8 @@ Brokerage::Brokerage(int argc, char** argv) {
     int y_process = 15;
 
     this->prod_limit = prod;
-    this->consumers[Bitcoin].duration = btc_process;
-    this->consumers[Ethereum].duration = eth_process;
-    this->producers[BlockchainX].duration = x_process;
-    this->producers[BlockchainY].duration = y_process;
+    this->consumers[Bitcoin].processing_time = btc_process;
+    this->consumers[Ethereum].processing_time = eth_process;
+    this->producers[BlockchainX].processing_time = x_process;
+    this->producers[BlockchainY].processing_time= y_process;
 }
