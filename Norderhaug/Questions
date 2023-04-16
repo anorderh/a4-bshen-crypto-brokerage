@@ -1,0 +1,13 @@
+For CS 480 Office Hours:
+
+1. How do you account for the situation using "counting production limit" when we're on the last request
+to be produced, and both producers are free? (i.e. 99/100 request produced)
+- By not having exclusive access to the 'count', both producers will pass the check
+- By implementing the 'count update' right after the check, consumers are prone to exiting prematurely
+- By implementing the 'count update' within the queue access w/ fail logic, the request would already
+have been produced
+
+2. Do you wait on the semaphores, then produce? Or produce and then wait on the semaphores
+
+3. Is implementing a 'while true' loop within Consumer considered 'busy waiting'?
+Is one possible alternative us implementing 'reqs_completed' var to atleast complete 1 thread?

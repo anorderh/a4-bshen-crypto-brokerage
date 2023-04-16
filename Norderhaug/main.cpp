@@ -3,6 +3,7 @@
 //
 #include "Brokerage.h"
 #include "Synch.h"
+#include "Buffer.h"
 extern "C" {
     #include "cryptoexchange.h"
 }
@@ -19,10 +20,12 @@ int main(int argc, char **argv) {
     Brokerage brokerage(argc, argv);
 
     // 2a. Create synchronization obj holding relevant semaphores
+    // 2b. Create buffer & implement mutex for exclusive access
     Synch synch(brokerage.queue_limit, brokerage.btc_limit);
-    // 2b. Create threads utilizing data from fields
+    Buffer buffer(brokerage.queue_limit);
 
-    // 3. Create buffer and implement mutex for exclusive access
+    // 3. Create threads utilizing data from fields
+
 
     // 4. Create barrier within main and implement into consumer threads
 

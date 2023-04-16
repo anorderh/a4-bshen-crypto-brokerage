@@ -11,12 +11,17 @@ Buffer::Buffer(int capacity) {
 
 void Buffer::publish(Request req) {
     pthread_mutex_lock(&this->mutex);
-    // Implementation
+    this->trade_req_queue.push(req);
     pthread_mutex_unlock(&this->mutex);
 }
 
-void Buffer::complete() {
+Request Buffer::retrieve() {
     pthread_mutex_lock(&this->mutex);
-    // Implementation
+
+    Request req = this->trade_req_queue.front();
+    this->trade_req_queue.pop();
+
     pthread_mutex_unlock(&this->mutex);
+
+    return req;
 }

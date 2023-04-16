@@ -5,14 +5,21 @@
 #ifndef NORDERHAUG_INTERACTION_H
 #define NORDERHAUG_INTERACTION_H
 
-struct TradeRequestService {
-    TradeRequestService(bool isBTC=false);
+#include "cryptoexchange.h"
 
-    bool isBTC;
+#define MILLI_TO_MICRO 1000
+
+struct TradeRequestService {
+    TradeRequestService(RequestType type);
+
+    RequestType type;
     int processing_time = 0;
 };
 
 struct RequestTransactionService {
+    RequestTransactionService(ConsumerType type);
+
+    ConsumerType type;
     int processing_time = 0;
 };
 

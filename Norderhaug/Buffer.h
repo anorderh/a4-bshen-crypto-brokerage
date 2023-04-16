@@ -12,14 +12,15 @@
 using namespace std;
 
 class Buffer {
+public:
     Buffer(int capacity);
 
+    pthread_mutex_t mutex;
     queue<Request> trade_req_queue;
     int capacity;
-    pthread_mutex_t mutex;
 
     void publish(Request req);
-    void complete();
+    Request retrieve();
 };
 
 

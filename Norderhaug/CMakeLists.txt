@@ -20,4 +20,8 @@ add_executable(Norderhaug
         Request.h
         Buffer.cpp
         Buffer.h
+        Producer.cpp
+        Producer.h
+        Consumer.cpp
+        Consumer.h
         )

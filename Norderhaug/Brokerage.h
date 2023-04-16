@@ -8,9 +8,14 @@
 #include "cryptoexchange.h"
 #include "Service.h"
 
-#define DEFAULT_PRODUCTION_LIMIT 100;
-#define BUFFER_CAPACITY 16;
-#define BITCOIN_CAPACITY 5;
+#define DEFAULT_PRODUCTION_LIMIT 100
+#define BUFFER_CAPACITY 16
+#define BITCOIN_CAPACITY 5
+
+#define BTC_IDX 0
+#define ETH_IDX 1
+#define BLOCKCHAIN_X_IDX 0
+#define BLOCKCHAIN_Y_IDX 1
 
 class Brokerage {
 public:

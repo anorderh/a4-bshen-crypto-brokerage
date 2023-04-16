@@ -4,6 +4,10 @@
 
 #include "Service.h"
 
-TradeRequestService::TradeRequestService(bool isBTC) {
-    this->isBTC = isBTC;
+TradeRequestService::TradeRequestService(RequestType type) {
+    this->type = type;
+}
+
+RequestTransactionService::RequestTransactionService(ConsumerType type) {
+    this->type = type;
 }

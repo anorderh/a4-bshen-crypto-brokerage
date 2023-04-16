@@ -4,6 +4,6 @@
 
 #include "Request.h"
 
-Request::Request(bool isBTC) {
-    this->isBTC = isBTC;
+Request::Request(RequestType type) {
+    this->type = type;
 }

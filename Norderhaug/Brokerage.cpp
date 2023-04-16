@@ -6,13 +6,13 @@
 
 void Brokerage::createServices() {
     // Initializing consumers & producers
-    this->consumers[Bitcoin] = TradeRequestService(true);
-    this->consumers[Ethereum] = TradeRequestService(false);
-    this->producers[BlockchainX] = RequestTransactionService();
-    this->producers[BlockchainY] = RequestTransactionService();
+    this->consumers = new TradeRequestService[2]{
+            TradeRequestService(Bitcoin), TradeRequestService(Ethereum)};
+    this->producers = new RequestTransactionService[2]{
+            RequestTransactionService(BlockchainX), RequestTransactionService(BlockchainY)};
 }
 
-Brokerage::Brokerage(int argc, char** argv) {
+Brokerage::Brokerage(int argc, char **argv) {
     createServices(); // Default service routines
 
     // Parsing CLI args with getopt, implement functionality later
@@ -24,8 +24,8 @@ Brokerage::Brokerage(int argc, char** argv) {
     int y_process = 15;
 
     this->prod_limit = prod;
-    this->consumers[Bitcoin].processing_time = btc_process;
-    this->consumers[Ethereum].processing_time = eth_process;
-    this->producers[BlockchainX].processing_time = x_process;
-    this->producers[BlockchainY].processing_time= y_process;
+    this->consumers[BTC_IDX].processing_time = btc_process;
+    this->consumers[ETH_IDX].processing_time = eth_process;
+    this->producers[BLOCKCHAIN_X_IDX].processing_time = x_process;
+    this->producers[BLOCKCHAIN_Y_IDX].processing_time = y_process;
 }
