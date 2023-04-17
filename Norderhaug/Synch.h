@@ -10,10 +10,8 @@
 
 class Synch {
 public:
-    Synch(int prod_limit, int capacity, int btc_capacity);
+    Synch(int capacity, int btc_capacity);
 
-    int reqs_produced = 0; int reqs_completed = 0;
-    int prod_limit;
     sem_t available_slots; sem_t unconsumed;
     sem_t available_btc_slots;
     sem_t barrier;

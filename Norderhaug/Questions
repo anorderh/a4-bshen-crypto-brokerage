@@ -6,8 +6,20 @@ to be produced, and both producers are free? (i.e. 99/100 request produced)
 - By implementing the 'count update' right after the check, consumers are prone to exiting prematurely
 - By implementing the 'count update' within the queue access w/ fail logic, the request would already
 have been produced
+- Store thread IDs in shared data structure and end the opposite one when exiting loop?
 
-2. Do you wait on the semaphores, then produce? Or produce and then wait on the semaphores
+2. Is implementing a 'while true' loop within Consumer considered 'busy waiting'?
+Is one possible alternative implementing a while loop w/ the 'prod limit reached &queue empty condition'?
 
-3. Is implementing a 'while true' loop within Consumer considered 'busy waiting'?
-Is one possible alternative us implementing 'reqs_completed' var to atleast complete 1 thread?
+3. Is a mutex required for checking if the queue is empty or not?
+
+4. Updating 'consumed' and 'produced' trackers... Before sleeping or after sleeping?
+Decided on updating within Buffer.cpp after adding/removing from queue, so there is no
+deadspace when consumers are checking "prod_limit < 100 && queue.notEmpty()"
+
+5. "Descriptive output should be produced each time RIGHT AFTER a request is added to or
+removed from the broker request queue". Then when producing output for consumers, do we so
+BEFORE the actual consumption or AFTER the actual consumption takes place?
+
+6. Consumer logic - When checking if prod_limit reached AND queue is empty, what happens if
+thread A checks condition while thread B is in process of consumption and has recently removed element?

@@ -12,6 +12,7 @@ public:
     Request(RequestType type);
 
     RequestType type;
+    int idx;
 };
 
 

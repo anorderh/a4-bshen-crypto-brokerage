@@ -19,10 +19,8 @@ int main(int argc, char **argv) {
     // 1. Grab fields
     Brokerage brokerage(argc, argv);
 
-    // 2a. Create synchronization obj holding relevant semaphores
-    // 2b. Create buffer & implement mutex for exclusive access
-    Synch synch(brokerage.queue_limit, brokerage.btc_limit);
-    Buffer buffer(brokerage.queue_limit);
+    // 2b. Create buffer w/ mutex for exclusive access & implement internal synch
+    Buffer buffer(brokerage.prod_limit, brokerage.queue_limit, brokerage.btc_limit);
 
     // 3. Create threads utilizing data from fields
 

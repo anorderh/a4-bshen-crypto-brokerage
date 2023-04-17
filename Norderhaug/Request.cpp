@@ -6,4 +6,5 @@
 
 Request::Request(RequestType type) {
     this->type = type;
+    this->idx = type == Bitcoin ? 0 : 1; // Converting RequestType into int
 }

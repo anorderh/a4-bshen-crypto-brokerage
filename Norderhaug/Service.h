@@ -21,6 +21,9 @@ struct RequestTransactionService {
 
     ConsumerType type;
     int processing_time = 0;
+
+    // Indices: BTC = 0, ETH = 1
+    unsigned int reqs_consumed[2];
 };
 
 

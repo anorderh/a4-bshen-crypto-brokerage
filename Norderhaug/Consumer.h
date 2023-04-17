@@ -8,6 +8,7 @@
 #include "Service.h"
 #include "Buffer.h"
 #include "Synch.h"
+#include "log.h"
 
 void consume(RequestTransactionService* service, Buffer* buffer, Synch* synch);
 
