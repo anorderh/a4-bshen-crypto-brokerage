@@ -9,6 +9,13 @@
 #include "Buffer.h"
 #include "Synch.h"
 
-void produce(TradeRequestService* service, Buffer* buffer, Synch* synch);
+class ProducerData {
+public:
+    ProducerData(TradeRequestService service, Buffer* buffer, Synch* synch);
+
+    TradeRequestService service; Buffer* buffer; Synch* synch;
+};
+
+void* produce(void* arg);
 
 #endif //NORDERHAUG_PRODUCER_H

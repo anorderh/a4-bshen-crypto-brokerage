@@ -10,6 +10,13 @@
 #include "Synch.h"
 #include "log.h"
 
-void consume(RequestTransactionService* service, Buffer* buffer, Synch* synch);
+class ConsumerData {
+public:
+    ConsumerData(RequestTransactionService service, Buffer* buffer, Synch* synch);
+
+    RequestTransactionService service; Buffer* buffer; Synch* synch;
+};
+
+void* consume(void* arg);
 
 #endif //NORDERHAUG_CONSUMER_H

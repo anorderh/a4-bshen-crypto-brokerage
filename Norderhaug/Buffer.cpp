@@ -4,7 +4,7 @@
 
 #include "Buffer.h"
 
-Buffer::Buffer(int prod_limit, int capacity, int btc_capacity) : synch(capacity, btc_capacity) {
+Buffer::Buffer(int prod_limit) {
     pthread_mutex_init(&this->mutex, nullptr);
     this->prod_limit = prod_limit;
 }
@@ -19,6 +19,7 @@ void Buffer::publish(TradeRequestService* service, Request req) {
     this->reqs_produced[req.idx]++;
     this->queue_tracker[req.idx]++;
 
+    // Log addition
     log_request_added(service->type,
                       reqs_produced, queue_tracker);
 }
@@ -34,6 +35,7 @@ Request Buffer::retrieve(RequestTransactionService* service) {
     service->reqs_consumed[req.idx]++;
     this->queue_tracker[req.idx]--;
 
+    // Log removal
     log_request_removed(service->type, req.type,
                         service->reqs_consumed, queue_tracker);
 

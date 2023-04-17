@@ -16,12 +16,11 @@ using namespace std;
 
 class Buffer {
 public:
-    Buffer(int prod_limit, int capacity, int btc_capacity);
+    Buffer(int prod_limit);
 
     int prod_limit;
     pthread_mutex_t mutex;
     queue<Request> trade_req_queue;
-    Synch synch;
 
     // Indices: BTC = 0, ETH = 1
     unsigned int reqs_produced[2];

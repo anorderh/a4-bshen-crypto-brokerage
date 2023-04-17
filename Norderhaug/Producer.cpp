@@ -5,23 +5,30 @@
 #include "Producer.h"
 #include <unistd.h>
 
-void produce(TradeRequestService* service, Buffer* buffer) {
+ProducerData::ProducerData(TradeRequestService service, Buffer* buffer, Synch* synch) : service(service) {
+    this->buffer = buffer;
+    this->synch = synch;
+}
+
+void* produce(void* arg) {
+    auto* pd = (ProducerData*) arg; // Arguments ptr
+
     // Iterate until prod_limit reached
-    while (buffer->getProductionSum() < buffer->prod_limit) {
+    while (pd->buffer->getProductionSum() < pd->buffer->prod_limit) {
 
         // 1. Produce request via sleeping
-        usleep(service->processing_time * MILLI_TO_MICRO);
+        usleep(pd->service.processing_time * MILLI_TO_MICRO);
 
         // 2. Wait for available space
-        if (service->type == Bitcoin) { // If bitcoin, wait for BTC slots
-            sem_wait(&buffer->synch.available_btc_slots);
+        if (pd->service.type == Bitcoin) { // If bitcoin, wait for BTC slots
+            sem_wait(&pd->synch->available_btc_slots);
         }
-        sem_wait(&buffer->synch.available_slots); // General slot availability
+        sem_wait(&pd->synch->available_slots); // General slot availability
 
         // 3. Add onto queue
-        buffer->publish(service, Request(service->type));
+        pd->buffer->publish(&pd->service, Request(pd->service.type));
 
         // 4. Signal that request has been added & update count
-        sem_post(&buffer->synch.unconsumed);
+        sem_post(&pd->synch->unconsumed);
     }
 }
