@@ -14,13 +14,13 @@ ConsumerData::ConsumerData(RequestTransactionService service, Buffer* buffer, Sy
 void* consume(void* arg) {
     auto* cd = (ConsumerData*) arg; // Arguments ptr
 
-    // Iterate until all reqs have been produced AND queue is empty
-    while (cd->buffer->getProductionSum() < cd->buffer->prod_limit || not cd->buffer->isEmpty()) {
+    while (true) {
         // 1. Wait for request to be added onto queue
         sem_wait(&cd->synch->unconsumed);
 
         // 2. Pull request off of queue
-        Request req = cd->buffer->retrieve(&cd->service);
+        // 'retrieve()' contains Production Limit & queue check, capable of ending thread!
+        Request req = cd->buffer->retrieve(&cd->service, &cd->synch->barrier);
 
         // 3. Signal that space has been freed up
         if (req.type == Bitcoin) { // Bitcoin req, signal BTC semaphore
@@ -31,7 +31,4 @@ void* consume(void* arg) {
         // 4. Complete request & update count
         usleep(cd->service.processing_time * MILLI_TO_MICRO);
     }
-
-    // 5. Unblock barrier
-    sem_post(&cd->synch->barrier);
 }

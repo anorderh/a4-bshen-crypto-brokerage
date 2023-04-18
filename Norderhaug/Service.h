@@ -23,7 +23,7 @@ struct RequestTransactionService {
     int processing_time = 0;
 
     // Indices: BTC = 0, ETH = 1
-    unsigned int reqs_consumed[2];
+    unsigned int reqs_consumed[2] = {0};;
 };
 
 

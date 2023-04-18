@@ -23,3 +23,10 @@ BEFORE the actual consumption or AFTER the actual consumption takes place?
 
 6. Consumer logic - When checking if prod_limit reached AND queue is empty, what happens if
 thread A checks condition while thread B is in process of consumption and has recently removed element?
+
+
+
+ANSWERS
+1. X, implement check for threads' finish inside critical section ("while(true) is not considered busy waiting"
+2. X, log inside critical section, as these values can be modified before logging occurs
+3. X, get away from "finding how long to iterate for" and move towards "finding when to stop"

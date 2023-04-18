@@ -7,6 +7,8 @@
 
 #include "cryptoexchange.h"
 #include "Service.h"
+#include "getopt.h"
+#include <iostream>
 
 #define DEFAULT_PRODUCTION_LIMIT 100
 #define BUFFER_CAPACITY 16
@@ -17,6 +19,8 @@
 #define BLOCKCHAIN_X_IDX 0
 #define BLOCKCHAIN_Y_IDX 1
 
+using namespace std;
+
 class Brokerage {
 public:
     Brokerage(int argc, char** argv);
@@ -25,8 +29,8 @@ public:
     int queue_limit = BUFFER_CAPACITY;
     int btc_limit = BITCOIN_CAPACITY;
 
-    TradeRequestService* consumers;
-    RequestTransactionService* producers;
+    TradeRequestService* producers;
+    RequestTransactionService* consumers;
 
     void createServices();
 };

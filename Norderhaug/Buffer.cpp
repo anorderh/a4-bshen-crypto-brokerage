@@ -10,43 +10,57 @@ Buffer::Buffer(int prod_limit) {
 }
 
 void Buffer::publish(TradeRequestService* service, Request req) {
-    // Exclusive request push
-    pthread_mutex_lock(&this->mutex);
-    this->trade_req_queue.push(req);
-    pthread_mutex_unlock(&this->mutex);
+    pthread_mutex_lock(&this->mutex); // START of Critical Section
 
-    // Updating req. counts in tracking arrays
+    // Check if prod. limit reached
+    if (getProductionSum() >= prod_limit) { // Exit thread!
+        pthread_mutex_unlock(&this->mutex);
+        pthread_exit(nullptr);
+    }
+
+    // Push request onto queue
+    this->trade_req_queue.push(req);
+
+    // Update values tracking reqs produced & reqs in queue
     this->reqs_produced[req.idx]++;
     this->queue_tracker[req.idx]++;
 
     // Log addition
     log_request_added(service->type,
                       reqs_produced, queue_tracker);
+
+    pthread_mutex_unlock(&this->mutex); // END of Critical Section
 }
 
-Request Buffer::retrieve(RequestTransactionService* service) {
-    // Exclusive request pop
-    pthread_mutex_lock(&this->mutex);
+Request Buffer::retrieve(RequestTransactionService* service, sem_t* barrier) {
+    pthread_mutex_lock(&this->mutex); // START of Critical Section
+
+    // Pull request from queue
     Request req = this->trade_req_queue.front();
     this->trade_req_queue.pop();
-    pthread_mutex_unlock(&this->mutex);
 
-    // Updating req. counts in tracking arrays
+    // Update values tracking reqs consumed & reqs in queue
     service->reqs_consumed[req.idx]++;
     this->queue_tracker[req.idx]--;
 
     // Log removal
     log_request_removed(service->type, req.type,
-                        service->reqs_consumed, queue_tracker);
+                            service->reqs_consumed, queue_tracker);
+
+    // Check if prod. limit reached AND queue empty
+    if (getProductionSum() >= prod_limit && isEmpty()) { // Signal barrier and exit thread!
+        pthread_mutex_unlock(&this->mutex);
+        sem_post(barrier);
+        pthread_exit(nullptr);
+    }
+
+    pthread_mutex_unlock(&this->mutex); // END of Critical Section
 
     return req;
 }
 
 bool Buffer::isEmpty() {
-//    pthread_mutex_lock(&this->mutex);
-    bool res = this->trade_req_queue.empty();
-//    pthread_mutex_unlock(&this->mutex);
-    return res;
+    return this->trade_req_queue.empty();
 }
 
 int Buffer::getProductionSum() {

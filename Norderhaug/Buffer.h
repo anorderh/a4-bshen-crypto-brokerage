@@ -10,7 +10,9 @@
 #include "Request.h"
 #include "Synch.h"
 #include "Service.h"
+extern "C" {
 #include "log.h"
+};
 
 using namespace std;
 
@@ -23,11 +25,11 @@ public:
     queue<Request> trade_req_queue;
 
     // Indices: BTC = 0, ETH = 1
-    unsigned int reqs_produced[2];
-    unsigned int queue_tracker[2];
+    unsigned int reqs_produced[2] = {0};
+    unsigned int queue_tracker[2] = {0};;
 
     void publish(TradeRequestService* service, Request req);
-    Request retrieve(RequestTransactionService* service);
+    Request retrieve(RequestTransactionService* service, sem_t* barrier);
     bool isEmpty();
     int getProductionSum();
 };
