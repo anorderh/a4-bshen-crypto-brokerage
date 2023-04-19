@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/14/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Service.h defines service routine members, including RequestTransaction array to track consumption
+ */
 
-#ifndef NORDERHAUG_INTERACTION_H
-#define NORDERHAUG_INTERACTION_H
+#ifndef SERVICE_H
+#define SERVICE_H
 
 #include "cryptoexchange.h"
 
@@ -22,10 +26,11 @@ struct RequestTransactionService {
     ConsumerType type;
     int processing_time = 0;
 
+    // Array tracking service's consumption of each type of request
     // Indices: BTC = 0, ETH = 1
-    unsigned int reqs_consumed[2] = {0};;
+    unsigned int reqs_consumed[2] = {0};
 };
 
 
 
-#endif //NORDERHAUG_INTERACTION_H
+#endif // SERVICE_H

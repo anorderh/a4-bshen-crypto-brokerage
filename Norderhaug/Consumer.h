@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/16/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Consumer.h defines Consumer's members, including service routine, Buffer, and Synch
+ */
 
-#ifndef NORDERHAUG_CONSUMER_H
-#define NORDERHAUG_CONSUMER_H
+#ifndef CONSUMER_H
+#define CONSUMER_H
 
 #include "Service.h"
 #include "Buffer.h"
@@ -19,4 +23,4 @@ public:
 
 void* consume(void* arg);
 
-#endif //NORDERHAUG_CONSUMER_H
+#endif //CONSUMER_H

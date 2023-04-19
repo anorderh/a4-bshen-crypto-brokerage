@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/14/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Brokerage.h defines its members and several constants related to Assignment #4's constraints
+ */
 
-#ifndef NORDERHAUG_ARGS_H
-#define NORDERHAUG_ARGS_H
+#ifndef ARGS_H
+#define ARGS_H
 
 #include "cryptoexchange.h"
 #include "Service.h"
@@ -11,9 +15,12 @@
 #include <iostream>
 
 #define DEFAULT_PRODUCTION_LIMIT 100
+
+// System constraints.
 #define BUFFER_CAPACITY 16
 #define BITCOIN_CAPACITY 5
 
+// For readability.
 #define BTC_IDX 0
 #define ETH_IDX 1
 #define BLOCKCHAIN_X_IDX 0
@@ -36,4 +43,4 @@ public:
 };
 
 
-#endif //NORDERHAUG_ARGS_H
+#endif //ARGS_H

@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/15/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Request.h defines Request's members
+ */
 
-#ifndef NORDERHAUG_REQUEST_H
-#define NORDERHAUG_REQUEST_H
+#ifndef REQUEST_H
+#define REQUEST_H
 
 #include "cryptoexchange.h"
 
@@ -16,4 +20,4 @@ public:
 };
 
 
-#endif //NORDERHAUG_REQUEST_H
+#endif //REQUEST_H

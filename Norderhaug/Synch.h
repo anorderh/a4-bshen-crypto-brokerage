@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/15/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Synch.h defines Synch's members
+ */
 
-#ifndef NORDERHAUG_SYNCH_H
-#define NORDERHAUG_SYNCH_H
+#ifndef SYNCH_H
+#define SYNCH_H
 
 #include <semaphore.h>
 
@@ -18,4 +22,4 @@ public:
 };
 
 
-#endif //NORDERHAUG_SYNCH_H
+#endif //SYNCH_H

@@ -1,28 +1,33 @@
-//
-// Created by Anthony Norderhaug on 4/14/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Brokerage.cpp initializes & modifies the service routines according to optional arguments.
+ */
 
 #include "Brokerage.h"
 
+/**
+ * createServices() initializes service routines associated with Producer & Consumer threads. Processing times set
+ * to 0ms.
+ */
 void Brokerage::createServices() {
-    // Initializing consumers & producers
     this->producers = new TradeRequestService[2]{
             TradeRequestService(Bitcoin), TradeRequestService(Ethereum)};
     this->consumers= new RequestTransactionService[2]{
             RequestTransactionService(BlockchainX), RequestTransactionService(BlockchainY)};
 }
 
+/**
+ * Brokerage constructor, parses optional command-line args to tweak production limit & service routine info.
+ * @param argc                          Arg count
+ * @param argv                          Args
+ */
 Brokerage::Brokerage(int argc, char **argv) {
-    createServices(); // Default service routines
+    createServices(); // Initialized w/ defaults
 
-    //    ./cryptoexc -r 150 -x 10 -y 15 -b 12 -e 7
-    //    int prod = 150;
-    //    int btc_process = 12;
-    //    int eth_process = 7;
-    //    int x_process = 10;
-    //    int y_process = 15;
-
-    // Parsing command-line arguments
+    // Parsing and applying command-line arguments
     int option = 0;
     while ((option = getopt(argc, argv, "r:x:y:b:e:")) != -1) {
         switch (option) {

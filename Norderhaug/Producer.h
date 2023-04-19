@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/16/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Producer.h defines Producer's members, including service routine, Buffer, and Synch
+ */
 
-#ifndef NORDERHAUG_PRODUCER_H
-#define NORDERHAUG_PRODUCER_H
+#ifndef PRODUCER_H
+#define PRODUCER_H
 
 #include "Service.h"
 #include "Buffer.h"
@@ -18,4 +22,4 @@ public:
 
 void* produce(void* arg);
 
-#endif //NORDERHAUG_PRODUCER_H
+#endif //PRODUCER_H

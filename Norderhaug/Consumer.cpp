@@ -1,16 +1,32 @@
-//
-// Created by Anthony Norderhaug on 4/16/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Consumer.cpp implements the Consumer thread logic and defines the arg ptr ConsumerData
+ */
 
 #include "Consumer.h"
 #include "log.h"
 #include <unistd.h>
 
+/**
+ * ConsumerData constructor, storing service routine and ptrs to Buffer & Synch objs
+ * @param service                           Service routine
+ * @param buffer                            Ptr to associated buffer
+ * @param synch                             Ptr to associated synch obj
+ */
 ConsumerData::ConsumerData(RequestTransactionService service, Buffer* buffer, Synch* synch) : service(service) {
     this->buffer = buffer;
     this->synch = synch;
 }
 
+/**
+ * consume() completes trade requests from the queue, utilizing semaphores to synchronize with producers in identifying
+ * unconsumed requests and signaling available slots. Sleeps to simulate request consumption. Capable of exiting during
+ * buffer access.
+ * @param arg                               Ptr holding ConsumerData fields
+ */
 void* consume(void* arg) {
     auto* cd = (ConsumerData*) arg; // Arguments ptr
 
@@ -28,7 +44,7 @@ void* consume(void* arg) {
         }
         sem_post(&cd->synch->available_slots); // Signal general availability semaphore
 
-        // 4. Complete request & update count
+        // 4. Simulate consumption via sleeping
         usleep(cd->service.processing_time * MILLI_TO_MICRO);
     }
 }

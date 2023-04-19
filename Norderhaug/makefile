@@ -1,3 +1,9 @@
+# Anthony Norderhaug, Contreras
+# CS 480 - Spring 2023
+# RedID: 823899304, 824089247
+#
+# makefile for compiling all C and C++ source into 'cryptoexc' executable
+
 PROGRAM = cryptoexc
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -g3 -c

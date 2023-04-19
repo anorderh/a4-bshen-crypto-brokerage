@@ -1,9 +1,13 @@
-//
-// Created by Anthony Norderhaug on 4/15/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Buffer.h defines Buffer's members, including a queue and mutex related to process synchronization
+ */
 
-#ifndef NORDERHAUG_BUFFER_H
-#define NORDERHAUG_BUFFER_H
+#ifndef BUFFER_H
+#define BUFFER_H
 
 #include <queue>
 #include <pthread.h>
@@ -24,9 +28,10 @@ public:
     pthread_mutex_t mutex;
     queue<Request> trade_req_queue;
 
+    // Arrays tracking reqs produced and reqs within queue
     // Indices: BTC = 0, ETH = 1
     unsigned int reqs_produced[2] = {0};
-    unsigned int queue_tracker[2] = {0};;
+    unsigned int queue_tracker[2] = {0};
 
     void publish(TradeRequestService* service, Request req);
     Request retrieve(RequestTransactionService* service, sem_t* barrier);
@@ -35,4 +40,4 @@ public:
 };
 
 
-#endif //NORDERHAUG_BUFFER_H
+#endif //BUFFER_H

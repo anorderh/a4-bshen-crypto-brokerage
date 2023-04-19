@@ -1,6 +1,10 @@
-//
-// Created by Anthony Norderhaug on 4/15/23.
-//
+/**
+ * Anthony Norderhaug, Anthony Contreras
+ * CS 480 - Spring 2023
+ * RedID: 823899304, 824089247
+ *
+ * Request.cpp stores request info and index to facilitate tracking
+ */
 
 #include "Request.h"
 
