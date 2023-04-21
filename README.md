@@ -8,6 +8,8 @@ Due on **4/20/23 at 4:00 PM**, start of class
 
 ## Overview
 
+[Assignment #4 Prompt](./a4.pdf)
+
 Simulate a cryptoexchange brokerage that connects *producers* with *consumers* via a *bounded buffer*. Parties will <u>vary amongst each other</u> by their **processing rate** and **allowed amount** on the buffer. These attributes will <u>affect the order of request execution</u>, all which will be logged with the provided output methods and compared with specific testcases to ensure proper *semaphore*, *thead*, and mutex *implementation*.
 
 ## Process
